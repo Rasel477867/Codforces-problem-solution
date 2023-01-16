@@ -8,59 +8,26 @@ using namespace std;
 #define ll long long int
 #define pb push_back
 vector<ll>v;
-set<ll>s;
-set<ll>:: iterator it;
+
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll n,p,m,i,a,ans;
-    cin>>n>>m;
+    ll i,n,a,b,sum=0,sum1=0,c=0;
+    cin>>n;
     for(i=0; i<n; i++)
     {
         cin>>a;
+        sum+=a;
         v.pb(a);
-
     }
-    for(i=1; i<n; i++)
-        v[i]=v[i]+v[i-1];
-
-
-    p=0;
-    ll j;
-   ans=0;
-   for(j=0; j<n; j++)
-   {
-
-       if(v[j]<=m)
-        {
-            ans++;
-
-        }
-       else
-       {
-
-           break;
-       }
-   }
-    for(i=j; i<n; i++)
+    for(i=0; i<n-1; i++)
     {
-
-
-        a=v[i]-v[p];
-
-        if(a>m)
-        {
-            ans=max(i-p-1,ans);
-            p++;
-        }
-        else
-        {
-            ans=max(ans,i-p);
-
-        }
+        sum1+=v[i];
+        if(2*sum1==sum)
+            c++;
     }
-
-    cout<<ans<<endl;
+    cout<<c;
+    return 0;
 }
