@@ -4,7 +4,7 @@
 #include <iostream>
 #include<bits/stdc++.h>
 #define endl '\n'
-#define ll unsigned long long int
+#define ll long long int
 #define pb push_back
 using namespace __gnu_pbds;
 using namespace std;
@@ -15,51 +15,41 @@ typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
 ordered_multiset s;
 ordered_multiset :: iterator it;
 vector<ll>v;
-ll n,t;
-bool cheak(ll num)
+bool cheak(ll n,ll a)
 {
-    ll sum=0,i;
-    for(i=0; i<n; i++)
-    {
-        sum+=num/v[i];
-    }
-
-    if(sum>=t)
-        return true;
-    else
-        return false;
+    return(n&(1<<a));
+}
+ll bset(ll n,ll i)
+{
+    return(n|(1<<i));
 }
 int main()
 {
-  ios::sync_with_stdio(0);
+    ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll i,r,l,mid,ans,a;
-    cin>>n>>t;
-    for(i=0; i<n; i++)
+    ll n,i,a,ans;
+    cin>>n;
+   ll num=n;
+    ll c=0;
+    while(num!=0)
     {
-        cin>>a;
-        v.pb(a);
+        c++;
+        num/=10;
     }
-    sort(v.begin(),v.end());
-    l=0;
-    if(n==43)
-        r=1000000000;
-    else
-     r=1000000000000000000;
-    while(r>=l)
-    {
-        mid=(l+r)/2;
-        if(cheak(mid))
-        {
-            ans=mid;
-            r=mid-1;
+    ans=(1<<c)-1;
 
+    i=0;
+    while(n!=0)
+    {
+        ll rev=n%10;
+        n=n/10;
+        if(rev==7)
+        {
+            ans+=1<<i;
         }
-        else
-            l=mid+1;
+        i++;
     }
     cout<<ans;
-return 0;
+  return 0;
 }
-
