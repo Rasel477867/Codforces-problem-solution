@@ -14,9 +14,7 @@ typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
         ordered_multiset;
 ordered_multiset s;
 //ordered_multiset :: iterator it;
-map<ll,ll>m;
-map<ll,ll>:: iterator it;
-
+vector<ll>v;
 bool cheak(ll n,ll a)
 {
     return(n&(1<<a));
@@ -31,31 +29,34 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll n,k,ans,a,b,i;
-    ll sum=0;
-    ans=0;
-
+    ll n,a1,ans1,a,ans,sum=0,i;
     cin>>n;
-    m[0]=1;
     for(i=0; i<n; i++)
     {
         cin>>a;
         sum+=a;
-        b=sum%n;
-        if(b<0)
-        {
-            b+=n;
-        }
-        m[b]++;
+        v.pb(a);
     }
-    for(it=m.begin(); it!=m.end(); it++)
+    ll num=1<<n;
+    ll mask;
+    ll result=sum;
+
+
+    for(mask=1; mask<num; mask++)
     {
-        if(it->second==0)
-            continue;
-       b=it->second;
-       b--;
-       ans+=(b*(b+1))/2;
+        ans=0;
+        for(i=0; i<n; i++)
+        {
+            if(mask&(1<<i))
+            {
+                ans+=v[i];
+            }
+        }
+        ans1=sum-ans;
+        ll c=abs(ans-ans1);
+       result=min(c,result);
     }
-    cout<<ans;
+    cout<<result;
+
   return 0;
 }
