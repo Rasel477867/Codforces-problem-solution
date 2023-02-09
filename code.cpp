@@ -14,7 +14,7 @@ using namespace std;
 typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
         tree_order_statistics_node_update>
         ordered_multiset;
-ordered_multiset s1;
+ordered_multiset s3;
 //ordered_multiset :: iterator it;
 const ll mod=1e9+7;
 const ll z=1e6+5;
@@ -23,7 +23,8 @@ const ll N=1e1;
  bool sive[N];
  vector<ll>prime;
  vector<ll>v;
-
+ set<ll>s1;
+ set<ll>s2;
  map<ll,ll >m;
  map<ll,ll >:: iterator it;
  long long int gcd(long long int a,long long int b)
@@ -143,37 +144,16 @@ int main()
 
    }
     /*start main funciton*/
-   ll t,n,a,k;
-   cin>>t;
-   while(t--)
-   {
-       cin>>n>>k;
-       if(n%2==0)
-       {
-           if(k%2==1)
-            cout<<"NO"<<endl;
-          else{
-            a=n/k;
-            if(a>=k)
-                cout<<"YES"<<endl;
-            else
-                cout<<"NO"<<endl;
-          }
-       }
+    ll t,a=0,n;
+    cin>>n;
+    for(i=31; i>=0; i--)
+    {
+       if(n&(1<<i))
+        a++;
+    }
+    cout<<a;
 
-       else{
-          if(k%2==0)
-            cout<<"NO"<<endl;
-          else{
-            a=n/k;
-            if(a>=k)
-                cout<<"YES"<<endl;
-            else{
-                cout<<"NO"<<endl;
-            }
-          }
-       }
-   }
+
 
 return 0;
 }
