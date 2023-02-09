@@ -143,37 +143,18 @@ int main()
 
    }
     /*start main funciton*/
-   ll t,n,a,mn,mx;
+   ll t,n,a;
    cin>>t;
    while(t--)
    {
        cin>>n;
-       v.clear();
-       ll ans;
-       for(i=0; i<n; i++)
-       {
-           cin>>a;
-           v.pb(a);
-       }
-       sort(v.begin(),v.end());
-       a=n/2;
-       mx=0;
-       mn=1e9+5;
-       for(i=0; i<a; i++)
-       {
-           mn=min(v[i],mn);
-       }
-       for(i=a+1; i<n; i++)
-       {
-           mx=max(v[i],mx);
-       }
-       ans=v[a]-mn+mx-v[a];
-       if(mx<1)
-         ans=v[a]-mn;
+       a=n&(n-1);
        if(n==1)
-        ans=0;
-
-       cout<<ans<<endl;
+        cout<<"NO"<<endl;
+       else if(a==0)
+        cout<<"NO"<<endl;
+       else
+           cout<<"YES"<<endl;
    }
 return 0;
 }
