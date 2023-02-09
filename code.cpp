@@ -1,4 +1,3 @@
-
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
 #include <functional> // for less
@@ -21,13 +20,13 @@ const ll mod=1e9+7;
 const ll z=1e6+5;
 ll fact[z];
 const ll N=1e1;
-bool sive[N];
-vector<ll>prime;
-vector<ll>v;
+ bool sive[N];
+ vector<ll>prime;
+ vector<ll>v;
 
-map<ll,ll >m;
-map<ll,ll >:: iterator it;
-long long int gcd(long long int a,long long int b)
+ map<ll,ll >m;
+ map<ll,ll >:: iterator it;
+ long long int gcd(long long int a,long long int b)
 {
     long long int c;
     while(a%b!=0)
@@ -41,7 +40,7 @@ long long int gcd(long long int a,long long int b)
 
 
 
-ll ex(ll a,ll b,ll mod)
+ ll ex(ll a,ll b,ll mod)
 {
     if(b==0)
         return 1;
@@ -50,47 +49,44 @@ ll ex(ll a,ll b,ll mod)
     else
         return (a*ex((a*a)%mod,(b-1)/2,mod))%mod;
 }
-void segsive(ll l,ll r)
-{
-    ll base,i,j;
-    bool sprime[r-l+1];
-    for(i=0; i<r-l+1; i++)
-        sprime[i]=true;
-    for(i=0; prime[i]*prime[i]<=r; i++)
-    {
-        ll cp=prime[i];
-        base=(l/cp)*cp;
-        if(base<l)
+ void segsive(ll l,ll r)
+ {    ll base,i,j;
+     bool sprime[r-l+1];
+     for(i=0; i<r-l+1; i++)
+          sprime[i]=true;
+     for(i=0; prime[i]*prime[i]<=r; i++)
+     {
+         ll cp=prime[i];
+         base=(l/cp)*cp;
+         if(base<l)
             base+=cp;
-        for(j=base; j<=r; j+=cp)
-            sprime[j-l]=false;
-        if(cp==base)
+         for(j=base; j<=r; j+=cp)
+              sprime[j-l]=false;
+         if(cp==base)
             sprime[base-l]=true;
-    }
-    for(i=0; i<(r-l+1); i++)
-    {
-        if(sprime[i]==true)
-        {
-            if(i+l==1)
-                continue;
-            cout<<i+l<<endl;
-        }
-    }
-    cout<<endl;
-}
-ll euler_pi_function(ll n)
-{
-    ll num,num1,num2,i;
-    num=n;
-    num1=n;
+     }
+     for(i=0; i<(r-l+1); i++)
+       {
+           if(sprime[i]==true)
+            {
+                if(i+l==1)
+                    continue;
+                cout<<i+l<<endl;
+            }
+       }
+       cout<<endl;
+ }
+  ll euler_pi_function(ll n)
+ { ll num,num1,num2,i;
+      num=n;
+     num1=n;
     for(i=0; prime[i]*prime[i]<=num ; i++)
     {
         while(1)
         {
             if(n%prime[i]!=0)
                 break;
-            else
-            {
+            else{
                 n/=prime[i];
                 m[prime[i]]++;
             }
@@ -100,17 +96,17 @@ ll euler_pi_function(ll n)
         m[n]++;
 
 
-    num=1;
-    num2=1;
-    for(it=m.begin(); it!=m.end(); it++)
-    {
-        num=num*(it->first);
-        num2=num2*((it->first)-1);
-    }
-    num=num1/num;
-    num=num*num2;
-    return num;
-}
+       num=1;
+      num2=1;
+     for(it=m.begin(); it!=m.end(); it++)
+     {
+         num=num*(it->first);
+         num2=num2*((it->first)-1);
+     }
+     num=num1/num;
+     num=num*num2;
+   return num;
+ }
 
 int main()
 {
@@ -136,33 +132,48 @@ int main()
     }
     for(i=0; i<N; i++)
     {
-        if(sive[i]==true)
-            prime.pb(i);
+       if(sive[i]==true)
+           prime.pb(i);
     }
-    fact[0]=1;
+   fact[0]=1;
 
-    for(i=1; i<z; i++)
-    {
-        fact[i]=(fact[i-1]*i)%mod;
+   for(i=1; i<z; i++)
+   {
+       fact[i]=(fact[i-1]*i)%mod;
 
-    }
+   }
     /*start main funciton*/
-    ll t,n,a,mn,mx;
+   ll t,n,a,mn,mx;
+   cin>>t;
+   while(t--)
+   {
+       cin>>n;
+       v.clear();
+       ll ans;
+       for(i=0; i<n; i++)
+       {
+           cin>>a;
+           v.pb(a);
+       }
+       sort(v.begin(),v.end());
+       a=n/2;
+       mx=0;
+       mn=1e9+5;
+       for(i=0; i<a; i++)
+       {
+           mn=min(v[i],mn);
+       }
+       for(i=a+1; i<n; i++)
+       {
+           mx=max(v[i],mx);
+       }
+       ans=v[a]-mn+mx-v[a];
+       if(mx<1)
+         ans=v[a]-mn;
+       if(n==1)
+        ans=0;
 
-    string s;
-    cin>>n;
-    cin>>s;
-    mn=0;
-    mx=0;
-    for(i=0; i<n; i++)
-    {
-        if(s[i]=='1')
-            mn++;
-        else
-            mx++;
-    }
-    a=min(mn,mx);
-    a=n-a*2;
-    cout<<a;
-    return 0;
+       cout<<ans<<endl;
+   }
+return 0;
 }
