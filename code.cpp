@@ -143,18 +143,37 @@ int main()
 
    }
     /*start main funciton*/
-   ll t,n,a;
+   ll t,n,a,k;
    cin>>t;
    while(t--)
    {
-       cin>>n;
-       a=n&(n-1);
-       if(n==1)
-        cout<<"NO"<<endl;
-       else if(a==0)
-        cout<<"NO"<<endl;
-       else
-           cout<<"YES"<<endl;
+       cin>>n>>k;
+       if(n%2==0)
+       {
+           if(k%2==1)
+            cout<<"NO"<<endl;
+          else{
+            a=n/k;
+            if(a>=k)
+                cout<<"YES"<<endl;
+            else
+                cout<<"NO"<<endl;
+          }
+       }
+
+       else{
+          if(k%2==0)
+            cout<<"NO"<<endl;
+          else{
+            a=n/k;
+            if(a>=k)
+                cout<<"YES"<<endl;
+            else{
+                cout<<"NO"<<endl;
+            }
+          }
+       }
    }
+
 return 0;
 }
