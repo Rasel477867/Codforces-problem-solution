@@ -18,109 +18,106 @@ ordered_multiset s3;
 //ordered_multiset :: iterator it;
 const ll mod=1e9+7;
 const ll z=1e5+3;
-
-const ll N=1e1;
+set<ll>s;
+const ll N=1e7;
  bool sive[N];
  vector<ll>prime;
- vector<ll>v2;
  vector<ll>v;
- set<ll>s1;
- set<ll>s2;
+
  map<ll,ll >m;
- map<ll,ll>m1;
  map<ll,ll>:: iterator it;
-
- ll digit(ll a)
- {
-     ll sum1=0;
-     while(a!=0)
-     {
-         sum1+=a%10;
-         a=a/10;
-     }
-     return sum1;
- }
- long long int gcd(long long int a,long long int b)
-{
-    long long int c;
-    while(a%b!=0)
-    {
-        c=b;
-        b=a%b;
-        a=c;
-    }
-    return b;
-}
-
-
-
- ll ex(ll a,ll b,ll mod)
+//
+// ll digit(ll a)
+// {
+//     ll sum1=0;
+//     while(a!=0)
+//     {
+//         sum1+=a%10;
+//         a=a/10;
+//     }
+//     return sum1;
+// }
+// long long int gcd(long long int a,long long int b)
+//{
+//    long long int c;
+//    while(a%b!=0)
+//    {
+//        c=b;
+//        b=a%b;
+//        a=c;
+//    }
+//    return b;
+//}
+//
+//
+//
+ ll ex(ll a,ll b)
 {
     if(b==0)
         return 1;
     else if(b%2==0)
-        return (ex((a*a)%mod,b/2,mod));
+        return (ex((a*a),b/2));
     else
-        return (a*ex((a*a)%mod,(b-1)/2,mod))%mod;
+        return (a*ex((a*a),(b-1)/2));
 }
- void segsive(ll l,ll r)
- {    ll base,i,j;
-     bool sprime[r-l+1];
-     for(i=0; i<r-l+1; i++)
-          sprime[i]=true;
-     for(i=0; prime[i]*prime[i]<=r; i++)
-     {
-         ll cp=prime[i];
-         base=(l/cp)*cp;
-         if(base<l)
-            base+=cp;
-         for(j=base; j<=r; j+=cp)
-              sprime[j-l]=false;
-         if(cp==base)
-            sprime[base-l]=true;
-     }
-     for(i=0; i<(r-l+1); i++)
-       {
-           if(sprime[i]==true)
-            {
-                if(i+l==1)
-                    continue;
-                cout<<i+l<<endl;
-            }
-       }
-       cout<<endl;
- }
-  ll euler_pi_function(ll n)
- { ll num,num1,num2,i;
-      num=n;
-     num1=n;
-    for(i=0; prime[i]*prime[i]<=num ; i++)
-    {
-        while(1)
-        {
-            if(n%prime[i]!=0)
-                break;
-            else{
-                n/=prime[i];
-                m[prime[i]]++;
-            }
-        }
-    }
-    if(n>1)
-        m[n]++;
-
-
-       num=1;
-      num2=1;
-     for(it=m.begin(); it!=m.end(); it++)
-     {
-         num=num*(it->first);
-         num2=num2*((it->first)-1);
-     }
-     num=num1/num;
-     num=num*num2;
-   return num;
- }
+// void segsive(ll l,ll r)
+// {    ll base,i,j;
+//     bool sprime[r-l+1];
+//     for(i=0; i<r-l+1; i++)
+//          sprime[i]=true;
+//     for(i=0; prime[i]*prime[i]<=r; i++)
+//     {
+//         ll cp=prime[i];
+//         base=(l/cp)*cp;
+//         if(base<l)
+//            base+=cp;
+//         for(j=base; j<=r; j+=cp)
+//              sprime[j-l]=false;
+//         if(cp==base)
+//            sprime[base-l]=true;
+//     }
+//     for(i=0; i<(r-l+1); i++)
+//       {
+//           if(sprime[i]==true)
+//            {
+//                if(i+l==1)
+//                    continue;
+//                cout<<i+l<<endl;
+//            }
+//       }
+//       cout<<endl;
+// }
+//  ll euler_pi_function(ll n)
+// { ll num,num1,num2,i;
+//      num=n;
+//     num1=n;
+//    for(i=0; prime[i]*prime[i]<=num ; i++)
+//    {
+//        while(1)
+//        {
+//            if(n%prime[i]!=0)
+//                break;
+//            else{
+//                n/=prime[i];
+//                m[prime[i]]++;
+//            }
+//        }
+//    }
+//    if(n>1)
+//        m[n]++;
+//
+//
+//       num=1;
+//      num2=1;
+//     for(it=m.begin(); it!=m.end(); it++)
+//     {
+//         num=num*(it->first);
+//         num2=num2*((it->first)-1);
+//     }
+//     num=num1/num;
+//     num=num*num2;
+//   return num;
+// }
 
 int main()
 {
@@ -151,39 +148,70 @@ int main()
     }
 
     /*start main funciton*/
-    ll t,n,a,ans,d,dist,s,same,b;
+    ll t,n,a,b,c;
     cin>>t;
     while(t--)
     {
         cin>>n;
-        m1.clear();
-        if(n==1)
-        {cin>>a;
-            cout<<0<<endl;
-            continue;
-
-        }
-        for(i=0; i<n; i++)
+        ll num=n;
+        m.clear();
+        s.clear();
+        for(i=0; prime[i]*prime[i]<=n; i++)
         {
-            cin>>a;
-            m1[a]++;
+            while(1)
+            {
+                if(num%prime[i]==0)
+                {
+                    m[prime[i]]++;
+                    num=num/prime[i];
+                }
+                else
+                    break;
+
+            }
         }
-        dist=m1.size();
-        same=0;
-        for(it=m1.begin(); it!=m1.end(); it++)
+        if(num>1)
+            m[num]++;
+      if(m.size()==1)
+      {
+        it=m.begin();
+        ll a1=it->first;
+        ll b1=it->second;
+        if(b1<6)
         {
-            same=max(same,it->second);
+            cout<<"NO"<<endl;
+
         }
-        d=max(same,dist);
-        s=min(same,dist);
-        d--;
-        ans=min(d,s);
-        cout<<ans<<endl;
+        else{
+            a=a1;
+            b=a*a;
+            m[a1]-=3;
+            c=ex(a,m[a1]);
+            cout<<"YES"<<endl;
+            cout<<a<<" "<<b<<" "<<c<<endl;
+        }
+      }
+      else
+      {
+         it=m.begin();
+         a=it->first;
+         it++;
+         b=it->first;
+        num=a*b;
+        c=n/num;
+        s.insert(a);
+        s.insert(b);
+        s.insert(c);
+        if(s.size()<3 || c==1)
+            cout<<"NO"<<endl;
+        else
+        {
+            cout<<"YES"<<endl;
+            cout<<a<<" "<<b<<" "<<c<<endl;
+        }
 
-
-
+      }
     }
-
 
 return 0;
 }
