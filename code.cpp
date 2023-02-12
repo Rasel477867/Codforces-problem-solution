@@ -18,7 +18,7 @@ ordered_multiset s3;
 //ordered_multiset :: iterator it;
 const ll mod=1e9+7;
 const ll z=1e5+3;
-set<ll>s;
+stack<ll>s;
 const ll N=1e7;
  bool sive[N];
  vector<ll>prime;
@@ -148,69 +148,27 @@ int main()
     }
 
     /*start main funciton*/
-    ll t,n,a,b,c;
+    ll t,a,b,a1,b1,c,r,l,mid,ans;
     cin>>t;
     while(t--)
     {
-        cin>>n;
-        ll num=n;
-        m.clear();
-        s.clear();
-        for(i=0; prime[i]*prime[i]<=n; i++)
+        cin>>a1>>b1;
+        a=max(a1,b1);
+        b=min(a1,b1);
+        l=0,r=a;
+        while(l<=r)
         {
-            while(1)
+            mid=(l+r)/2;
+            c=(a+b)/3;
+            if(c>=mid && b>=mid)
             {
-                if(num%prime[i]==0)
-                {
-                    m[prime[i]]++;
-                    num=num/prime[i];
-                }
-                else
-                    break;
-
+                ans=mid;
+                l=mid+1;
             }
+            else
+                r=mid-1;
         }
-        if(num>1)
-            m[num]++;
-      if(m.size()==1)
-      {
-        it=m.begin();
-        ll a1=it->first;
-        ll b1=it->second;
-        if(b1<6)
-        {
-            cout<<"NO"<<endl;
-
-        }
-        else{
-            a=a1;
-            b=a*a;
-            m[a1]-=3;
-            c=ex(a,m[a1]);
-            cout<<"YES"<<endl;
-            cout<<a<<" "<<b<<" "<<c<<endl;
-        }
-      }
-      else
-      {
-         it=m.begin();
-         a=it->first;
-         it++;
-         b=it->first;
-        num=a*b;
-        c=n/num;
-        s.insert(a);
-        s.insert(b);
-        s.insert(c);
-        if(s.size()<3 || c==1)
-            cout<<"NO"<<endl;
-        else
-        {
-            cout<<"YES"<<endl;
-            cout<<a<<" "<<b<<" "<<c<<endl;
-        }
-
-      }
+        cout<<ans<<endl;
     }
 
 return 0;
