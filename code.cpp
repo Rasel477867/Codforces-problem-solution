@@ -24,8 +24,7 @@ const ll N=1e7;
  vector<ll>prime;
  vector<ll>v;
 
- map<ll,ll >m;
- map<ll,ll>:: iterator it;
+
 //
 // ll digit(ll a)
 // {
@@ -148,28 +147,36 @@ int main()
     }
 
     /*start main funciton*/
-    ll t,a,b,a1,b1,c,r,l,mid,ans;
-    cin>>t;
-    while(t--)
-    {
-        cin>>a1>>b1;
-        a=max(a1,b1);
-        b=min(a1,b1);
-        l=0,r=a;
-        while(l<=r)
-        {
-            mid=(l+r)/2;
-            c=(a+b)/3;
-            if(c>=mid && b>=mid)
-            {
-                ans=mid;
-                l=mid+1;
-            }
-            else
-                r=mid-1;
-        }
-        cout<<ans<<endl;
-    }
-
+     ll t,a,b,f,n,m,ans,p;
+     cin>>t;
+     while(t--)
+     {
+         ans=0;
+         cin>>a>>b>>n>>m;
+         ll c=n/m;
+         if(c>0)
+         {
+             f=(a*m)/(m+1);
+             if(b>f)
+             {
+                 p=n/(m+1);
+                 ans=(m+1)*p*a-p*a;
+                 a=min(a,b);
+                 n=n-(m+1)*p;
+                 ans+=a*n;
+                 cout<<ans<<endl;
+             }
+             else{
+                a=min(a,b);
+                ans=n*a;
+                cout<<ans<<endl;
+             }
+         }
+         else{
+            a=min(a,b);
+            ans=n*a;
+            cout<<ans<<endl;
+         }
+     }
 return 0;
 }
