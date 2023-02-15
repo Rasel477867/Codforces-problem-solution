@@ -17,48 +17,15 @@ typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
 ordered_multiset s3;
 //ordered_multiset :: iterator it;
 const ll mod=1e9+7;
-const ll z=1e5+3;
+const ll z=1e7+10;
 stack<ll>s;
-const ll N=1e7;
+const ll N=1e1;
  bool sive[N];
  vector<ll>prime;
  vector<ll>v;
+ll fact[z];
 
 
-//
-// ll digit(ll a)
-// {
-//     ll sum1=0;
-//     while(a!=0)
-//     {
-//         sum1+=a%10;
-//         a=a/10;
-//     }
-//     return sum1;
-// }
-// long long int gcd(long long int a,long long int b)
-//{
-//    long long int c;
-//    while(a%b!=0)
-//    {
-//        c=b;
-//        b=a%b;
-//        a=c;
-//    }
-//    return b;
-//}
-//
-//
-//
- ll ex(ll a,ll b)
-{
-    if(b==0)
-        return 1;
-    else if(b%2==0)
-        return (ex((a*a),b/2));
-    else
-        return (a*ex((a*a),(b-1)/2));
-}
 // void segsive(ll l,ll r)
 // {    ll base,i,j;
 //     bool sprime[r-l+1];
@@ -123,60 +90,63 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll i,j;
-    for(i=0; i<N; i++)
-    {
-        sive[i]=true;
-    }
-    sive[0]=false;
-    sive[1]=false;
-    for(i=2; i*i<=N; i++)
-    {
-        if(sive[i])
-        {
-            for(j=i*i; j<N; j+=i)
-            {
-                sive[j]=false;
-            }
-        }
-    }
-    for(i=0; i<N; i++)
-    {
-       if(sive[i]==true)
-           prime.pb(i);
-    }
+//    ll i,j;
+//    for(i=0; i<N; i++)
+//    {
+//        sive[i]=true;
+//    }
+//    sive[0]=false;
+//    sive[1]=false;
+//    for(i=2; i*i<=N; i++)
+//    {
+//        if(sive[i])
+//        {
+//            for(j=i*i; j<N; j+=i)
+//            {
+//                sive[j]=false;
+//            }
+//        }
+//    }
+//    for(i=0; i<N; i++)
+//    {
+//       if(sive[i]==true)
+//           prime.pb(i);
+//    }
 
     /*start main funciton*/
-     ll t,a,b,f,n,m,ans,p;
-     cin>>t;
-     while(t--)
-     {
-         ans=0;
-         cin>>a>>b>>n>>m;
-         ll c=n/m;
-         if(c>0)
-         {
-             f=(a*m)/(m+1);
-             if(b>f)
-             {
-                 p=n/(m+1);
-                 ans=(m+1)*p*a-p*a;
-                 a=min(a,b);
-                 n=n-(m+1)*p;
-                 ans+=a*n;
-                 cout<<ans<<endl;
-             }
-             else{
-                a=min(a,b);
-                ans=n*a;
-                cout<<ans<<endl;
-             }
-         }
-         else{
-            a=min(a,b);
-            ans=n*a;
-            cout<<ans<<endl;
-         }
-     }
+    ll n,m,i,n1,m1,ans,c,t;
+    cin>>t;
+    while(t--)
+    {
+
+        cin>>n1>>m1;
+        n=max(n1,m1);
+        m=min(n1,m1);
+
+        if(n-m==1)
+        {
+            cout<<2<<endl;
+            cout<<n<<" "<<m<<endl;
+        }
+        else{
+            v.clear();
+            v.pb(n-1);
+            for(i=n; i>=m; i--)
+            {
+                v.pb(i);
+            }
+
+            for(i=m+1; i<n-1; i++)
+            {
+                v.pb(i);
+            }
+            cout<<v.size()<<endl;
+            for(i=0; i<v.size(); i++)
+            {
+                cout<<v[i]<<" ";
+            }
+            cout<<endl;
+        }
+    }
 return 0;
 }
