@@ -19,13 +19,13 @@ typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
 const ll mod=1e9+7;
 const ll z=1e7+10;
 
-const ll N=1e7;
+const ll N=1e1;
 bool sive[N];
 vector<ll>prime;
-vector<ll>v;
-ll fact[z];
-map<ll,ll>m;
-map<ll,ll>:: iterator it;
+vector<pair<ll,ll> >v;
+ll fact[105];
+ll b[105];
+
 ll ex(ll a,ll b)
 {
     if(b==0)
@@ -124,67 +124,60 @@ int main()
     }
 
     /*start main funciton*/
-    ll n,num,t,a,b,c,d;
+    ll t,n,a,num,m,ans;
     cin>>t;
     while(t--)
     {
-
-    m.clear();
-    cin>>n;
-    ll y=1;
-    num=n;
-    if(n%2==0)
-    {
-        cout<<1<<" "<<n/2<<endl;
-    }
-    else {
-
-
-    for(i=0; prime[i]*prime[i]<=num ; i++)
-    {
-        while(1)
-        {
-            y=0;
-            if(n%prime[i]!=0)
-                break;
-            else{
-                n/=prime[i];
-                m[prime[i]]++;
-            }
-        }
-    }
-    if(n>1)
-        m[n]++;
+        cin>>n;
+        num=n;
         v.clear();
-        v.pb(1);
-    for(it=m.begin(); it!=m.end(); it++)
-    {
-       v.pb(it->first);
-    }
-    y=0;
-    for(i=0; i<v.size(); i++)
-    {
-        for(j=i; j<v.size(); j++)
+        for(i=0; i<105; i++)
         {
-            a=v[i];
-            b=v[j];
-            c=ex(a,b-1);
-             d=ex(b,a-1);
-            if((d+c)*a*b==num)
+            b[i]=0;
+            fact[i]=0;
+        }
+        while(n--)
+        {
+            for(i=1; i<num; i++)
             {
-                y=1;
-                break;
+                cin>>a;
+                if(fact[a]<i)
+                    fact[a]=i;
+                if(i==num-1)
+                {
+                    b[a]++;
+                }
+            }
+        }
+        ans=0;
+        ll p;
+        for(i=0; i<=num; i++)
+        {
+
+            if(ans<b[i])
+            {
+            p=i;
+              ans=b[i];
             }
 
         }
-        if(y==1)
-            break;
+
+
+        fact[p]=num;
+
+
+        for(i=1; i<=num; i++)
+           {
+               v.pb({fact[i],i});
+
+           }
+           sort(v.begin(),v.end());
+        for(i=0; i<num; i++)
+            cout<<v[i].second<<" ";
+        cout<<endl;
+
+
     }
-    if(y==0)
-        cout<<-1<<endl;
-    else
-        cout<<a<<" "<<b<<endl;
-    }
-    }
+
     return 0;
 }
