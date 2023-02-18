@@ -26,6 +26,15 @@ vector<ll>v;
 ll fact[z];
 map<ll,ll>m;
 map<ll,ll>:: iterator it;
+ll ex(ll a,ll b)
+{
+    if(b==0)
+        return 1;
+    else if(b%2==0)
+        return (ex((a*a),b/2));
+    else
+        return (a*ex((a*a),(b-1)/2));
+}
 
 // void segsive(ll l,ll r)
 // {    ll base,i,j;
@@ -115,7 +124,7 @@ int main()
     }
 
     /*start main funciton*/
-    ll n,num,t;
+    ll n,num,t,a,b,c,d;
     cin>>t;
     while(t--)
     {
@@ -124,6 +133,13 @@ int main()
     cin>>n;
     ll y=1;
     num=n;
+    if(n%2==0)
+    {
+        cout<<1<<" "<<n/2<<endl;
+    }
+    else {
+
+
     for(i=0; prime[i]*prime[i]<=num ; i++)
     {
         while(1)
@@ -139,28 +155,36 @@ int main()
     }
     if(n>1)
         m[n]++;
+        v.clear();
+        v.pb(1);
+    for(it=m.begin(); it!=m.end(); it++)
+    {
+       v.pb(it->first);
+    }
+    y=0;
+    for(i=0; i<v.size(); i++)
+    {
+        for(j=i; j<v.size(); j++)
+        {
+            a=v[i];
+            b=v[j];
+            c=ex(a,b-1);
+             d=ex(b,a-1);
+            if((d+c)*a*b==num)
+            {
+                y=1;
+                break;
+            }
 
-     ll ans,sum=0,a=0,b;
-     for(it=m.begin(); it!=m.end(); it++)
-     {
-        a=max(a,it->second);
-     }
-     for(i=0; i<a; i++)
-     {
-        ans=1;
-         for(it=m.begin(); it!=m.end(); it++)
-         {
-             num=it->first;
-             if(m[num]==0)
-                continue;
-             else{
-                ans=ans*num;
-                m[num]--;
-             }
-         }
-         sum+=ans;
-     }
-     cout<<sum<<endl;
+        }
+        if(y==1)
+            break;
+    }
+    if(y==0)
+        cout<<-1<<endl;
+    else
+        cout<<a<<" "<<b<<endl;
+    }
     }
     return 0;
 }
