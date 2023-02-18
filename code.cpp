@@ -14,17 +14,18 @@ using namespace std;
 typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
         tree_order_statistics_node_update>
         ordered_multiset;
-ordered_multiset s3;
+//ordered_multiset s3;
 //ordered_multiset :: iterator it;
 const ll mod=1e9+7;
 const ll z=1e7+10;
-stack<ll>s;
-const ll N=1e1;
- bool sive[N];
- vector<ll>prime;
- vector<ll>v;
-ll fact[z];
 
+const ll N=1e7;
+bool sive[N];
+vector<ll>prime;
+vector<ll>v;
+ll fact[z];
+map<ll,ll>m;
+map<ll,ll>:: iterator it;
 
 // void segsive(ll l,ll r)
 // {    ll base,i,j;
@@ -90,63 +91,76 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-//    ll i,j;
-//    for(i=0; i<N; i++)
-//    {
-//        sive[i]=true;
-//    }
-//    sive[0]=false;
-//    sive[1]=false;
-//    for(i=2; i*i<=N; i++)
-//    {
-//        if(sive[i])
-//        {
-//            for(j=i*i; j<N; j+=i)
-//            {
-//                sive[j]=false;
-//            }
-//        }
-//    }
-//    for(i=0; i<N; i++)
-//    {
-//       if(sive[i]==true)
-//           prime.pb(i);
-//    }
+    ll i,j;
+    for(i=0; i<N; i++)
+    {
+        sive[i]=true;
+    }
+    sive[0]=false;
+    sive[1]=false;
+    for(i=2; i*i<=N; i++)
+    {
+        if(sive[i])
+        {
+            for(j=i*i; j<N; j+=i)
+            {
+                sive[j]=false;
+            }
+        }
+    }
+    for(i=0; i<N; i++)
+    {
+       if(sive[i]==true)
+           prime.pb(i);
+    }
 
     /*start main funciton*/
-    ll n,m,i,n1,m1,ans,c,t;
+    ll n,num,t;
     cin>>t;
     while(t--)
     {
 
-        cin>>n1>>m1;
-        n=max(n1,m1);
-        m=min(n1,m1);
-
-        if(n-m==1)
+    m.clear();
+    cin>>n;
+    ll y=1;
+    num=n;
+    for(i=0; prime[i]*prime[i]<=num ; i++)
+    {
+        while(1)
         {
-            cout<<2<<endl;
-            cout<<n<<" "<<m<<endl;
-        }
-        else{
-            v.clear();
-            v.pb(n-1);
-            for(i=n; i>=m; i--)
-            {
-                v.pb(i);
+            y=0;
+            if(n%prime[i]!=0)
+                break;
+            else{
+                n/=prime[i];
+                m[prime[i]]++;
             }
-
-            for(i=m+1; i<n-1; i++)
-            {
-                v.pb(i);
-            }
-            cout<<v.size()<<endl;
-            for(i=0; i<v.size(); i++)
-            {
-                cout<<v[i]<<" ";
-            }
-            cout<<endl;
         }
     }
-return 0;
+    if(n>1)
+        m[n]++;
+
+     ll ans,sum=0,a=0,b;
+     for(it=m.begin(); it!=m.end(); it++)
+     {
+        a=max(a,it->second);
+     }
+     for(i=0; i<a; i++)
+     {
+        ans=1;
+         for(it=m.begin(); it!=m.end(); it++)
+         {
+             num=it->first;
+             if(m[num]==0)
+                continue;
+             else{
+                ans=ans*num;
+                m[num]--;
+             }
+         }
+         sum+=ans;
+     }
+     cout<<sum<<endl;
+    }
+    return 0;
 }
