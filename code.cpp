@@ -22,19 +22,8 @@ const ll z=1e7+10;
 const ll N=1e1;
 bool sive[N];
 vector<ll>prime;
-vector<pair<ll,ll> >v;
-ll fact[105];
-ll b[105];
-
-ll ex(ll a,ll b)
-{
-    if(b==0)
-        return 1;
-    else if(b%2==0)
-        return (ex((a*a),b/2));
-    else
-        return (a*ex((a*a),(b-1)/2));
-}
+vector<ll>v;
+deque<ll>d;
 
 // void segsive(ll l,ll r)
 // {    ll base,i,j;
@@ -119,65 +108,40 @@ int main()
     }
     for(i=0; i<N; i++)
     {
-       if(sive[i]==true)
-           prime.pb(i);
+        if(sive[i]==true)
+            prime.pb(i);
     }
 
     /*start main funciton*/
-    ll t,n,a,num,m,ans;
+    ll t,n,c,b,a;
     cin>>t;
     while(t--)
     {
-        cin>>n;
-        num=n;
+        d.clear();
         v.clear();
-        for(i=0; i<105; i++)
+        cin>>n;
+        for(i=0; i<n; i++)
         {
-            b[i]=0;
-            fact[i]=0;
+            cin>>a;
+            v.pb(a);
         }
-        while(n--)
+        for(i=0; i<n; i++)
         {
-            for(i=1; i<num; i++)
-            {
-                cin>>a;
-                if(fact[a]<i)
-                    fact[a]=i;
-                if(i==num-1)
-                {
-                    b[a]++;
-                }
-            }
+            cin>>a;
+            d.pb(a);
         }
-        ans=0;
-        ll p;
-        for(i=0; i<=num; i++)
-        {
-
-            if(ans<b[i])
-            {
-            p=i;
-              ans=b[i];
-            }
-
-        }
-
-
-        fact[p]=num;
-
-
-        for(i=1; i<=num; i++)
-           {
-               v.pb({fact[i],i});
-
-           }
-           sort(v.begin(),v.end());
-        for(i=0; i<num; i++)
-            cout<<v[i].second<<" ";
-        cout<<endl;
-
-
+      ll ans=0;
+      for(i=n-1; i>=0; i--)
+      {
+          a=d.back();
+          if(a==v[i])
+          {
+              d.pop_back();
+          }
+          else
+            ans++;
+      }
+      cout<<ans<<endl;
     }
-
     return 0;
 }
