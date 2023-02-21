@@ -17,72 +17,14 @@ typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
 //ordered_multiset s3;
 //ordered_multiset :: iterator it;
 const ll mod=1e9+7;
-const ll z=1e7+10;
 
 const ll N=1e1;
-bool sive[N];
-vector<ll>prime;
-vector<ll>v;
-deque<ll>d;
+ bool sive[N];
+ vector<ll>prime;
+ vector<ll>v;
 
-// void segsive(ll l,ll r)
-// {    ll base,i,j;
-//     bool sprime[r-l+1];
-//     for(i=0; i<r-l+1; i++)
-//          sprime[i]=true;
-//     for(i=0; prime[i]*prime[i]<=r; i++)
-//     {
-//         ll cp=prime[i];
-//         base=(l/cp)*cp;
-//         if(base<l)
-//            base+=cp;
-//         for(j=base; j<=r; j+=cp)
-//              sprime[j-l]=false;
-//         if(cp==base)
-//            sprime[base-l]=true;
-//     }
-//     for(i=0; i<(r-l+1); i++)
-//       {
-//           if(sprime[i]==true)
-//            {
-//                if(i+l==1)
-//                    continue;
-//                cout<<i+l<<endl;
-//            }
-//       }
-//       cout<<endl;
-// }
-//  ll euler_pi_function(ll n)
-// { ll num,num1,num2,i;
-//      num=n;
-//     num1=n;
-//    for(i=0; prime[i]*prime[i]<=num ; i++)
-//    {
-//        while(1)
-//        {
-//            if(n%prime[i]!=0)
-//                break;
-//            else{
-//                n/=prime[i];
-//                m[prime[i]]++;
-//            }
-//        }
-//    }
-//    if(n>1)
-//        m[n]++;
-//
-//
-//       num=1;
-//      num2=1;
-//     for(it=m.begin(); it!=m.end(); it++)
-//     {
-//         num=num*(it->first);
-//         num2=num2*((it->first)-1);
-//     }
-//     num=num1/num;
-//     num=num*num2;
-//   return num;
-// }
+
+
 
 int main()
 {
@@ -108,40 +50,58 @@ int main()
     }
     for(i=0; i<N; i++)
     {
-        if(sive[i]==true)
-            prime.pb(i);
+       if(sive[i]==true)
+           prime.pb(i);
     }
 
     /*start main funciton*/
-    ll t,n,c,b,a;
+    string s;
+    ll  c=1;
+    for(i=1; ; i+=c)
+    {
+        c++;
+        v.pb(i);
+        if(i>=1000)
+             break;
+
+    }
+
+     ll t,n,k,a,b,num;
     cin>>t;
     while(t--)
     {
-        d.clear();
-        v.clear();
-        cin>>n;
-        for(i=0; i<n; i++)
+        cin>>k>>n;
+        num=k;
+        c=0;
+        ll y=1;
+        for(i=0;i<=n; i++)
         {
-            cin>>a;
-            v.pb(a);
+            k--;
+            a=n-v[i];
+            if(a>=k)
+            {  if(c==num)
+                  {
+                      y=0;
+                      break;
+                  }
+                cout<<v[i]<<" ";
+                b=v[i];
+                c++;
+            }
+            else
+                break;
         }
-        for(i=0; i<n; i++)
-        {
-            cin>>a;
-            d.pb(a);
-        }
-      ll ans=0;
-      for(i=n-1; i>=0; i--)
-      {
-          a=d.back();
-          if(a==v[i])
-          {
-              d.pop_back();
-          }
-          else
-            ans++;
-      }
-      cout<<ans<<endl;
+        if(y==0)
+            continue;
+        k=num-c;
+
+
+        for(i=b+1; i<b+1+k; i++)
+            cout<<i<<" ";
+        cout<<endl;
     }
-    return 0;
+
+
+return 0;
 }
+
