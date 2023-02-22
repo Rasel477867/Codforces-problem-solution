@@ -22,7 +22,8 @@ const ll N=1e1;
  bool sive[N];
  vector<ll>prime;
  vector<ll>v;
-
+  set<ll>s;
+  set<ll>:: iterator it;
 
 
 
@@ -55,51 +56,46 @@ int main()
     }
 
     /*start main funciton*/
-    string s;
-    ll  c=1;
-    for(i=1; ; i+=c)
-    {
-        c++;
-        v.pb(i);
-        if(i>=1000)
-             break;
-
-    }
-
-     ll t,n,k,a,b,num;
-    cin>>t;
+   ll t,n,a,b,d,mx;
+   cin>>t;
     while(t--)
     {
-        cin>>k>>n;
-        num=k;
-        c=0;
-        ll y=1;
-        for(i=0;i<=n; i++)
+        cin>>n;
+        s.clear();
+        v.clear();
+        for(i=0; i<n; i++)
         {
-            k--;
-            a=n-v[i];
-            if(a>=k)
-            {  if(c==num)
-                  {
-                      y=0;
-                      break;
-                  }
-                cout<<v[i]<<" ";
-                b=v[i];
-                c++;
-            }
-            else
-                break;
+            cin>>a;
+            s.insert(a);
+            v.pb(a);
         }
-        if(y==0)
-            continue;
-        k=num-c;
+        sort(v.begin(),v.end());
+        a=1;
+        b=1;
+        if(s.size()==1)
+        {
+            cout<<(n-1)*n<<endl;
+        }
+        else{
+            for(i=0; i<n; i++)
+            {
+                if(v[i]==v[i+1])
+                    a++;
+                else
+                    break;
 
-
-        for(i=b+1; i<b+1+k; i++)
-            cout<<i<<" ";
-        cout<<endl;
+            }
+            for(i=n-1; i>0; i--)
+            {
+                if(v[i]==v[i-1])
+                    b++;
+                else
+                    break;
+            }
+            cout<<a*b*2<<endl;
+        }
     }
+
 
 
 return 0;
