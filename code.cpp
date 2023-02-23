@@ -21,9 +21,20 @@ const ll mod=1e9+7;
 const ll N=1e1;
  bool sive[N];
  vector<ll>prime;
- vector<ll>v;
+  vector<ll>v;
   set<ll>s;
   set<ll>:: iterator it;
+long long int gcd(long long int a,long long int b)
+{
+    long long int c;
+    while(a%b!=0)
+    {
+        c=b;
+        b=a%b;
+        a=c;
+    }
+    return b;
+}
 
 
 
@@ -56,45 +67,31 @@ int main()
     }
 
     /*start main funciton*/
-   ll t,n,a,b,d,mx;
-   cin>>t;
+    ll t,n,a,b,c,ans,mx,mn;
+    cin>>t;
     while(t--)
     {
         cin>>n;
-        s.clear();
         v.clear();
+        mx=0;
+        mn=1e9+7;
         for(i=0; i<n; i++)
         {
             cin>>a;
-            s.insert(a);
             v.pb(a);
+            mx=max(mx,a);
+            mn=min(mn,a);
         }
-        sort(v.begin(),v.end());
-        a=1;
-        b=1;
-        if(s.size()==1)
+        ll ans=v[0];
+        for(i=1; i<n; i++)
         {
-            cout<<(n-1)*n<<endl;
+            ans=gcd(ans,v[i]);
         }
-        else{
-            for(i=0; i<n; i++)
-            {
-                if(v[i]==v[i+1])
-                    a++;
-                else
-                    break;
-
-            }
-            for(i=n-1; i>0; i--)
-            {
-                if(v[i]==v[i-1])
-                    b++;
-                else
-                    break;
-            }
-            cout<<a*b*2<<endl;
+        if(ans>1)
+            cout<<mx/ans<<endl;
+        else
+            cout<<mx<<endl;
         }
-    }
 
 
 
