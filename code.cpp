@@ -19,11 +19,13 @@ typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
 const ll mod=1e9+7;
 
 const ll N=1e1;
- bool sive[N];
- vector<ll>prime;
-  vector<ll>v;
-  set<ll>s;
-  set<ll>:: iterator it;
+bool sive[N];
+vector<ll>prime;
+vector<ll>v;
+set<ll>s;
+set<ll>:: iterator it;
+ll m[1000];
+
 long long int gcd(long long int a,long long int b)
 {
     long long int c;
@@ -35,7 +37,11 @@ long long int gcd(long long int a,long long int b)
     }
     return b;
 }
-
+double cal(double x)
+{
+    double y=sqrt(x);
+    return(x*x+2*y);
+}
 
 
 int main()
@@ -62,39 +68,51 @@ int main()
     }
     for(i=0; i<N; i++)
     {
-       if(sive[i]==true)
-           prime.pb(i);
+        if(sive[i]==true)
+            prime.pb(i);
     }
 
     /*start main funciton*/
-    ll t,n,a,b,c,ans,mx,mn;
-    cin>>t;
-    while(t--)
-    {
-        cin>>n;
-        v.clear();
-        mx=0;
-        mn=1e9+7;
-        for(i=0; i<n; i++)
-        {
-            cin>>a;
-            v.pb(a);
-            mx=max(mx,a);
-            mn=min(mn,a);
-        }
-        ll ans=v[0];
-        for(i=1; i<n; i++)
-        {
-            ans=gcd(ans,v[i]);
-        }
-        if(ans>1)
-            cout<<mx/ans<<endl;
-        else
-            cout<<mx<<endl;
-        }
+    ll n,mid,ans,m,t,l,r;
+    cin>>n;
+     ll a;
+     v.pb(0);
+     for(i=0; i<n; i++)
+     {
+         cin>>a;
+         v.pb(a);
+     }
+     v.pb(1000000);
+     sort(v.begin(),v.end());
+
+     cin>>t;
+     while(t--)
+     {
+         cin>>m;
+         ans=0;
+         l=0;
+         r=n+1;
+         while(l<=r)
+         {
+             mid=(l+r)/2;
+             if(v[mid]<=m)
+             {
+                 ans=mid;
+                 l=mid+1;
+             }
+             else
+                r=mid-1;
+         }
+         if(ans>n)
+            cout<<n<<endl;
+         else
+         cout<<ans<<endl;
+     }
 
 
 
-return 0;
+
+
+    return 0;
 }
 
