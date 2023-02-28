@@ -22,9 +22,10 @@ const ll N=1e1;
 bool sive[N];
 vector<ll>prime;
 vector<ll>v;
+vector<ll>p;
 set<ll>s;
 set<ll>:: iterator it;
-ll m[1000];
+ll k,n;
 
 long long int gcd(long long int a,long long int b)
 {
@@ -41,6 +42,26 @@ double cal(double x)
 {
     double y=sqrt(x);
     return(x*x+2*y);
+}
+bool cheak(ll num)
+{
+    ll c=k,a,b,i;
+    for(i=0; i<n; i++)
+    {
+        a=v[i]/p[i];
+        if(a<num)
+        {
+            b=num*p[i];
+            c=v[i]+c-b;
+            if(c<0)
+                return false;
+        }
+
+    }
+    if(c<0)
+        return false;
+    else
+        return true;
 }
 
 
@@ -73,41 +94,34 @@ int main()
     }
 
     /*start main funciton*/
-    ll n,mid,ans,m,t,l,r;
-    cin>>n;
-     ll a;
-     v.pb(0);
-     for(i=0; i<n; i++)
-     {
-         cin>>a;
-         v.pb(a);
-     }
-     v.pb(1000000);
-     sort(v.begin(),v.end());
+    ll ans,mid,a,b,l,r;
+    cin>>n>>k;
+    for(i=0; i<n; i++)
+    {
+        cin>>a;
+        p.pb(a);
+    }
+    for(i=0; i<n; i++)
+    {
+        cin>>a;
+        v.pb(a);
+    }
+    l=0;
+    ans=0;
+    r=1e7;
+    while(r>=l)
+    {
+        mid=(l+r)/2;
+        if(cheak(mid))
+        {
+            ans=mid;
+            l=mid+1;
+        }
+        else
+            r=mid-1;
+    }
+    cout<<ans;
 
-     cin>>t;
-     while(t--)
-     {
-         cin>>m;
-         ans=0;
-         l=0;
-         r=n+1;
-         while(l<=r)
-         {
-             mid=(l+r)/2;
-             if(v[mid]<=m)
-             {
-                 ans=mid;
-                 l=mid+1;
-             }
-             else
-                r=mid-1;
-         }
-         if(ans>n)
-            cout<<n<<endl;
-         else
-         cout<<ans<<endl;
-     }
 
 
 
