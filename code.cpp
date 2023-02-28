@@ -25,7 +25,7 @@ vector<ll>v;
 vector<ll>p;
 set<ll>s;
 set<ll>:: iterator it;
-ll k,n;
+ll k,num,m;
 
 long long int gcd(long long int a,long long int b)
 {
@@ -43,25 +43,34 @@ double cal(double x)
     double y=sqrt(x);
     return(x*x+2*y);
 }
-bool cheak(ll num)
+bool cheak(ll n)
 {
-    ll c=k,a,b,i;
-    for(i=0; i<n; i++)
+    ll b,c,a;
+    if(n>=k)
     {
-        a=v[i]/p[i];
-        if(a<num)
-        {
-            b=num*p[i];
-            c=v[i]+c-b;
-            if(c<0)
-                return false;
-        }
+        a=(((n*(n+1))/2)-((n-k)*((n-k)+1)/2));
+    }
+    else{
+        a=((n*(n+1))/2)+k-n;
+    }
+    ll n1=n-1;
+    c=num-k;
+    if(c<=n1)
+    {
+        b=(((n1*(n1+1))/2)-(((n1-c)*((n1-c)+1))/2));
+    }
+    else{
+
+        b=((n1*(n1+1))/2)+c-n1;
 
     }
-    if(c<0)
-        return false;
-    else
+
+
+    if(a+b<=m)
         return true;
+    else
+        return false;
+
 }
 
 
@@ -94,21 +103,13 @@ int main()
     }
 
     /*start main funciton*/
-    ll ans,mid,a,b,l,r;
-    cin>>n>>k;
-    for(i=0; i<n; i++)
-    {
-        cin>>a;
-        p.pb(a);
-    }
-    for(i=0; i<n; i++)
-    {
-        cin>>a;
-        v.pb(a);
-    }
-    l=0;
-    ans=0;
-    r=1e7;
+    ll ans=0,mid,a,b,l,r;
+
+    cin>>num>>m>>k;
+    l=1;
+    r=1e9;
+
+
     while(r>=l)
     {
         mid=(l+r)/2;
@@ -117,14 +118,13 @@ int main()
             ans=mid;
             l=mid+1;
         }
-        else
+        else{
             r=mid-1;
+        }
     }
-    cout<<ans;
 
 
-
-
+   cout<<ans;
 
 
     return 0;
