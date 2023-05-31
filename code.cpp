@@ -31,20 +31,7 @@ int convert(string s)
     b=s[1]-48;
     return (a*10+b);
 }
-ll calc(ll n)
-{
-    ll sum=0,a,i;
-    a=n/2;
-    sum=0;
-    if(n%2==0)
-        a--;
-    for(i=n-1; i>a; i--)
-        sum+=i;
-    sum=sum*2;
-    if(n%2==1)
-        return(sum+n/2);
-     return sum;
-}
+
 //string cal(string s1,string s2,int x)
 //{
 //    ll h,m,c,d,a,b;
@@ -168,63 +155,33 @@ int main()
     }
 
     //start main funciton
-    ll t,n,a,b,ans,sum,l,r;
+    ll t,b,r,n;
     string s;
     cin>>t;
     while(t--)
     {
         cin>>n>>s;
-        v.clear();
-        sum=calc(n);
-        ans=0;
-        for(i=0; i<n/2; i++)
-        {
-            if(s[i]=='L')
-            {
-                a=n-i-1-i;
-                ans+=a;
-                v.pb(a);
-
-
-            }
-            else
-                {
-
-                    v.pb(0);
-                }
-        }
-        b=n/2;
-        if(n%2==1)
-            b++;
-        for(i=b; i<n; i++)
-        {
-            if(s[i]=='R')
-            {
-                a=i-(n-i-1);
-                ans+=a;
-                v.pb(a);
-
-            }
-            else
-            {
-
-                v.pb(0);
-            }
-        }
-        if(n%2==1)
-            v.pb(0);
-        ans=sum-ans;
-
-        sort(v.begin(),v.end());
-        reverse(v.begin(),v.end());
+        b=0,r=0;
         for(i=0; i<n; i++)
         {
-            ans+=v[i];
-            cout<<ans<<" ";
+            if(s[i]=='R')
+                r=1;
+            else if(s[i]=='B')
+                b=1;
+            else
+            {
+                if(r!=b)
+                    break;
+                r=0;
+                b=0;
+            }
         }
-        cout<<endl;
-
+        if(b==r)
+            cout<<"YES"<<endl;
+        else
+            cout<<"NO"<<endl;
     }
+
 
 
 
