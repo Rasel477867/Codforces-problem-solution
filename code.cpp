@@ -44,35 +44,16 @@ int main()
     cin>>t;
     while(t--)
     {
-     on=0;
-     ans=0;
-     sum=0;
      cin>>n;
-     for(i=0; i<n; i++)
+     ans=0;
+     for(i=1; i<=n; i++)
      {
-         cin>>a;
-         if(a==1){
-
-
-            ans+=2;
-            on++;
-         }
-
-            sum+=a;
-
+         if(n%i==0)
+            ans++;
+         else
+            break;
      }
-     b=n-on;
-     ans+=b;
-     if(n==1)
-        cout<<"NO"<<endl;
-     else{
-
-       if(sum>=ans)
-        cout<<"YES"<<endl;
-       else
-        cout<<"NO"<<endl;
-     }
-
+     cout<<ans<<endl;
     }
 
 
