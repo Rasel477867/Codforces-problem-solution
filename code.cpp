@@ -12,6 +12,7 @@
 const ll mod=1e9+7;
 using namespace std;
 map<ll,ll>m;
+vector<ll>v;
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -41,19 +42,19 @@ int main()
     ll i,j,t;
     ll n,k,b,a,sum,on,ans;
 
-    cin>>t;
+    t=1;
     while(t--)
     {
-     cin>>n;
-     ans=0;
-     for(i=1; i<=n; i++)
+     cin>>n>>k;
+     v.clear();
+     for(i=0; i<n; i++)
      {
-         if(n%i==0)
-            ans++;
-         else
-            break;
+         cin>>a;
+         v.pb(a);
      }
-     cout<<ans<<endl;
+     sort(v.begin(),v.end());
+     reverse(v.begin(),v.end());
+     cout<<v[k-1]<<endl;
     }
 
 
