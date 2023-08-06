@@ -41,42 +41,45 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,k,b,a,sum,on,ans,c,p;
+    ll n,a,y,pre;
 
-    string s;
-    cin>>n>>s;
-    ans=0;
-    c=0;
-    p=n;
-    for(i=n-1; i>=0; i--)
-    {
-        if(s[i]=='0')
+    cin>>t;
+    while(t--)
+    {        y=0;
+        v.clear();
+        cin>>n;
+        for(i=0; i<n;i++)
         {
-            p=i;
-            v1.pb(0);
+            cin>>a;
+            v.pb(a);
         }
-        else {
-            break;
-        }
-    }
-    for(i=0; i<p; i++)
-    {
-        if(s[i]=='1')
-            ans++;
-        else{
-           v.pb(ans);
-           ans=0;
-
+        sort(v.begin(),v.end());
+        pre=v[0]+1;
+        for(i=1; i<n; i++)
+        {
+            a=v[i]-pre;
+            if(a==0)
+            {
+                pre++;
             }
-
+            else if(a==1)
+            {
+                pre=v[i];
+            }
+            else if(a==2)
+            {
+                pre++;
+            }
+            else {
+                y=1;
+                break;
+            }
+        }
+        if(y==0)
+            cout<<"YES"<<endl;
+        else
+            cout<<"NO"<<endl;
     }
-    if(ans!=0)
-        v.pb(ans);
-    for(i=0; i<v.size(); i++)
-        cout<<v[i];
-    for(i=0; i<v1.size(); i++)
-        cout<<v1[i];
-    cout<<endl;
 
 
     return 0;
