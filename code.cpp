@@ -13,6 +13,7 @@ const ll mod=1e9+7;
 using namespace std;
 map<ll,ll>m;
 vector<ll>v;
+vector<ll>v1;
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -40,22 +41,42 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,k,b,a,sum,on,ans;
+    ll n,k,b,a,sum,on,ans,c,p;
 
-    t=1;
-    while(t--)
+    string s;
+    cin>>n>>s;
+    ans=0;
+    c=0;
+    p=n;
+    for(i=n-1; i>=0; i--)
     {
-     cin>>n>>k;
-     v.clear();
-     for(i=0; i<n; i++)
-     {
-         cin>>a;
-         v.pb(a);
-     }
-     sort(v.begin(),v.end());
-     reverse(v.begin(),v.end());
-     cout<<v[k-1]<<endl;
+        if(s[i]=='0')
+        {
+            p=i;
+            v1.pb(0);
+        }
+        else {
+            break;
+        }
     }
+    for(i=0; i<p; i++)
+    {
+        if(s[i]=='1')
+            ans++;
+        else{
+           v.pb(ans);
+           ans=0;
+
+            }
+
+    }
+    if(ans!=0)
+        v.pb(ans);
+    for(i=0; i<v.size(); i++)
+        cout<<v[i];
+    for(i=0; i<v1.size(); i++)
+        cout<<v1[i];
+    cout<<endl;
 
 
     return 0;
