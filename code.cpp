@@ -10,21 +10,8 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-vector<ll>v;
-set<ll>s;
-ll n,k;
-bool cheak(ll num)
-{
-    ll sum=1,p=v[num],i;
-    for(i=num+1; i<v.size(); i++)
-    {
-        sum+=n-v[i];
-    }
-    if(p>=sum)
-      return true;
-    else
-        return false;
-}
+deque<ll>v;
+
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -52,40 +39,40 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll l,r,ans,a,b,mid;
-    cin>>t;
-    while(t--)
+    ll n,num,a,b;
+    string s;
+    cin>>n>>s;
+    for(i=0; i<n; i++)
     {
-        v.clear();
-        cin>>n>>k;
-        ll ans1=0;
-        for(i=0; i<k; i++)
-        {
-            cin>>a;
-            if(a>=n)
-                ans1++;
-            else
-                v.pb(a);
-        }
-        sort(v.begin(),v.end());
-        l=0;
-        r=k-1;
-        while(r>=l)
-        {
-            mid=(l+r)/2;
-            if(cheak(mid))
-            {
-                b=mid;
-                r=mid-1;
-            }
-            else
-                l=mid+1;
-        }
-        ans=k-b+ans1;
-
-
-        cout<<ans<<endl;
+        a=s[i]-48;
+        v.pb(a);
     }
+    a=n/2;
+    b=n-a*2;
+    if(n==3)
+        cout<<v[0]<<v[1]<<v[2];
+    else if(b==0)
+    {
+        for(i=0; i<n; i++)
+        {
+            if(i!=0 && i%2==0)
+                cout<<"-"<<v[i];
+            else
+                cout<<v[i];
+        }
+    }
+    else{
+        for(i=0; i<n-2; i++)
+        {
+            if(i%2==0&& i!=0)
+                cout<<'-'<<v[i];
+            else
+                cout<<v[i];
+        }
+        cout<<v[n-2]<<v[n-1];
+    }
+
+
 
     return 0;
 }
