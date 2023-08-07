@@ -10,8 +10,7 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-vector<pair<char,ll> >v;
-vector<pair<char,ll> >v1;
+set<string>v;
 
 //ll ex(ll a,ll b,ll mod)
 //{
@@ -42,48 +41,15 @@ int main()
     ll i,j,t;
     ll n,num,a,b,c,pre;
     string s;
+
     cin>>t;
+    cin.ignore();
     while(t--)
-    {
-        cin>>s;
-        n=s.size();
-        v.clear();
-         v1.clear();
-        for(i=0; i<n; i++)
-        {
-            v.pb({s[i],i});
-        }
-        sort(v.begin(),v.end());
-        c=0;
-       v1.pb({v[0].first,0});
-        pre=v[0].second;
-
-        for(i=1; i<n; i++)
-        {
-            if(v[i].second>pre)
-            {
-                pre=v[i].second;
-                v1.pb({v[i].first,i});
-            }
-            else
-            {
-
-                if(v[i].first=='9')
-                    {
-                        v1.pb({'9',i});
-                    }
-                else
-                {
-                    char ch=v[i].first+1;
-                    v1.pb({ch,i});
-                }
-            }
-        }
-        sort(v1.begin(),v1.end());
-        for(i=0; i<n; i++)
-            cout<<v1[i].first;
-        cout<<endl;
-    }
+ {
+     getline(cin,s);
+     v.insert(s);
+ }
+ cout<<v.size();
 
 
 
