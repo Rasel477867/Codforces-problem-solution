@@ -10,7 +10,8 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-deque<ll>v;
+vector<pair<char,ll> >v;
+vector<pair<char,ll> >v1;
 
 //ll ex(ll a,ll b,ll mod)
 //{
@@ -39,37 +40,49 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,num,a,b;
+    ll n,num,a,b,c,pre;
     string s;
-    cin>>n>>s;
-    for(i=0; i<n; i++)
+    cin>>t;
+    while(t--)
     {
-        a=s[i]-48;
-        v.pb(a);
-    }
-    a=n/2;
-    b=n-a*2;
-    if(n==3)
-        cout<<v[0]<<v[1]<<v[2];
-    else if(b==0)
-    {
+        cin>>s;
+        n=s.size();
+        v.clear();
+         v1.clear();
         for(i=0; i<n; i++)
         {
-            if(i!=0 && i%2==0)
-                cout<<"-"<<v[i];
-            else
-                cout<<v[i];
+            v.pb({s[i],i});
         }
-    }
-    else{
-        for(i=0; i<n-2; i++)
+        sort(v.begin(),v.end());
+        c=0;
+       v1.pb({v[0].first,0});
+        pre=v[0].second;
+
+        for(i=1; i<n; i++)
         {
-            if(i%2==0&& i!=0)
-                cout<<'-'<<v[i];
+            if(v[i].second>pre)
+            {
+                pre=v[i].second;
+                v1.pb({v[i].first,i});
+            }
             else
-                cout<<v[i];
+            {
+
+                if(v[i].first=='9')
+                    {
+                        v1.pb({'9',i});
+                    }
+                else
+                {
+                    char ch=v[i].first+1;
+                    v1.pb({ch,i});
+                }
+            }
         }
-        cout<<v[n-2]<<v[n-1];
+        sort(v1.begin(),v1.end());
+        for(i=0; i<n; i++)
+            cout<<v1[i].first;
+        cout<<endl;
     }
 
 
