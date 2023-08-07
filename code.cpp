@@ -8,12 +8,10 @@
 #define ll long long int
 #define pb push_back
 #define pf push_front
-
 const ll mod=1e9+7;
 using namespace std;
-map<ll,ll>m;
 vector<ll>v;
-vector<ll>v1;
+set<ll>s;
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -41,46 +39,38 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,a,y,pre;
+    ll n,a,b,y=0,k,mn=1e9,ans;
+    cin>>n>>k;
+    for(i=0; i<n; i++)
+    {
+        cin>>a;
+        v.pb(a);
 
-    cin>>t;
-    while(t--)
-    {        y=0;
-        v.clear();
-        cin>>n;
-        for(i=0; i<n;i++)
-        {
-            cin>>a;
-            v.pb(a);
-        }
-        sort(v.begin(),v.end());
-        pre=v[0]+1;
-        for(i=1; i<n; i++)
-        {
-            a=v[i]-pre;
-            if(a==0)
-            {
-                pre++;
-            }
-            else if(a==1)
-            {
-                pre=v[i];
-            }
-            else if(a==2)
-            {
-                pre++;
-            }
-            else {
-                y=1;
-                break;
-            }
-        }
-        if(y==0)
-            cout<<"YES"<<endl;
-        else
-            cout<<"NO"<<endl;
+        s.insert(a);
+        mn=min(a,mn);
     }
+    if(s.size()==1)
+        cout<<0<<endl;
+    else{
 
+
+            ans=0;
+            for(i=0; i<n; i++)
+            {
+                a=v[i]-mn;
+                b=a/k;
+
+                if(b*k!=a)
+                    y=1;
+                ans+=b;
+
+            }
+            if(y==1)
+                cout<<-1<<endl;
+            else
+            cout<<ans;
+
+    }
 
     return 0;
 }
