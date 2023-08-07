@@ -12,6 +12,19 @@ const ll mod=1e9+7;
 using namespace std;
 vector<ll>v;
 set<ll>s;
+ll n,k;
+bool cheak(ll num)
+{
+    ll sum=1,p=v[num],i;
+    for(i=num+1; i<v.size(); i++)
+    {
+        sum+=n-v[i];
+    }
+    if(p>=sum)
+      return true;
+    else
+        return false;
+}
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -39,37 +52,39 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,a,b,y=0,k,mn=1e9,ans;
-    cin>>n>>k;
-    for(i=0; i<n; i++)
+    ll l,r,ans,a,b,mid;
+    cin>>t;
+    while(t--)
     {
-        cin>>a;
-        v.pb(a);
-
-        s.insert(a);
-        mn=min(a,mn);
-    }
-    if(s.size()==1)
-        cout<<0<<endl;
-    else{
-
-
-            ans=0;
-            for(i=0; i<n; i++)
-            {
-                a=v[i]-mn;
-                b=a/k;
-
-                if(b*k!=a)
-                    y=1;
-                ans+=b;
-
-            }
-            if(y==1)
-                cout<<-1<<endl;
+        v.clear();
+        cin>>n>>k;
+        ll ans1=0;
+        for(i=0; i<k; i++)
+        {
+            cin>>a;
+            if(a>=n)
+                ans1++;
             else
-            cout<<ans;
+                v.pb(a);
+        }
+        sort(v.begin(),v.end());
+        l=0;
+        r=k-1;
+        while(r>=l)
+        {
+            mid=(l+r)/2;
+            if(cheak(mid))
+            {
+                b=mid;
+                r=mid-1;
+            }
+            else
+                l=mid+1;
+        }
+        ans=k-b+ans1;
 
+
+        cout<<ans<<endl;
     }
 
     return 0;
