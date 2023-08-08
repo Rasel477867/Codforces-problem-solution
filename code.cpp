@@ -10,7 +10,9 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-set<string>v;
+map<ll,ll>m;
+map<ll,ll>:: iterator it;
+vector<ll>v;
 
 //ll ex(ll a,ll b,ll mod)
 //{
@@ -39,17 +41,31 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,num,a,b,c,pre;
-    string s;
-
-    cin>>t;
-    cin.ignore();
-    while(t--)
- {
-     getline(cin,s);
-     v.insert(s);
- }
- cout<<v.size();
+    ll n,k,r,l,mid,ans;
+    cin>>n>>k;
+    float avg,key,sum=0.0,a;
+    for(i=0; i<n; i++)
+    {
+        cin>>a;
+        sum+=a;
+    }
+    key=k-1+0.5;
+    l=0;
+    r=1e9;
+     ans=0;
+    while(r>=l)
+    {
+        mid=(l+r)/2;
+        avg=(sum+float(mid*k))/float(n+mid);
+        if(avg>=key)
+        {
+            ans=mid;
+            r=mid-1;
+        }
+        else
+            l=mid+1;
+    }
+    cout<<ans;
 
 
 
