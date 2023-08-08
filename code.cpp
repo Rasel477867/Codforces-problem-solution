@@ -41,17 +41,27 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll sum,k,y,x,avg;
-    cin>>t;
-    while(t--)
+    ll n,m,mx,mn;
+    cin>>n>>m;
+    if(n==0 && m==0)
+        cout<<0<<" "<<0;
+    else if(n==0)
     {
-        cin>>x>>y>>k;
-        sum=k*y+k-1;
-        x--;
-        avg=sum/x;
-        if(avg*x!=sum)
-            avg++;
-        cout<<avg+k<<endl;
+        cout<<"Impossible";
+    }
+    else if(m==0)
+        cout<<n<<" "<<n;
+    else{
+        if(n<=m)
+        {
+            mx=n+m-1;
+            mn=m;
+        }
+        else{
+            mx=n+m-1;
+            mn=n;
+        }
+        cout<<mn<<" "<<mx;
     }
 
 
