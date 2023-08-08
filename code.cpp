@@ -41,31 +41,18 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,k,r,l,mid,ans;
-    cin>>n>>k;
-    float avg,key,sum=0.0,a;
-    for(i=0; i<n; i++)
+    ll sum,k,y,x,avg;
+    cin>>t;
+    while(t--)
     {
-        cin>>a;
-        sum+=a;
+        cin>>x>>y>>k;
+        sum=k*y+k-1;
+        x--;
+        avg=sum/x;
+        if(avg*x!=sum)
+            avg++;
+        cout<<avg+k<<endl;
     }
-    key=k-1+0.5;
-    l=0;
-    r=1e9;
-     ans=0;
-    while(r>=l)
-    {
-        mid=(l+r)/2;
-        avg=(sum+float(mid*k))/float(n+mid);
-        if(avg>=key)
-        {
-            ans=mid;
-            r=mid-1;
-        }
-        else
-            l=mid+1;
-    }
-    cout<<ans;
 
 
 
