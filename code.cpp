@@ -11,7 +11,7 @@
 const ll mod=1e9+7;
 using namespace std;
 
-
+vector<ll>v;
 
 
 //ll ex(ll a,ll b,ll mod)
@@ -41,47 +41,37 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll t,j,i;
-    ll n,c,ans=0,p,pr,b,a;
-    cin>>t;
-    while(t--)
+    ll n,a,b,c,y;
+    cin>>n;
+    for(i=0; i<n; i++)
     {
-        cin>>a>>b;
-        ans=0;
-        if(a==b)
-            cout<<2<<endl;
-        else if(a<b)
-            cout<<1<<endl;
-        else
-        {
-          p=0;
-          c=0;
-          pr=0;
-          if(b==1)
-          {
-              pr=1;
-              b++;
-          }
-          ans=1e10;
-          for(i=b; i<=a; i++)
-          {
-              if(p>50)
-                break;
-             n=a;
-             c=p;
-            while(n!=0)
-            {
-                n=n/i;
-                c++;
-            }
-            p++;
-            ans=min(c,ans);
-
-
-          }
-          cout<<ans+pr<<endl;
-        }
-
+        cin>>a;
+        v.pb(a);
     }
+    sort(v.begin(),v.end());
+    c=1;
+    y=0;
+    for(i=0; i<n-1; i++)
+    {
+        if(v[i+1]-v[i]==1)
+        {
+
+            c++;
+            if(c==3)
+            {
+                y=1;
+                break;
+            }
+        }
+        else if(v[i+1]-v[i]==0)
+            continue;
+        else
+            c=1;
+    }
+    if(y==1)
+        cout<<"YES"<<endl;
+    else
+        cout<<"NO"<<endl;
 
     return 0;
 }
