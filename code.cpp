@@ -39,61 +39,27 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i;
-    ll a,b,c,t,g,n;
-    a=0;
-    c=0;
-    t=0;
-    g=0;
-    string s;
-    cin>>n>>s;
-    if(n%4==0)
+    string a,b,s;
+    ll y;
+    cin>>a>>b;
+    y=0;
+    for(i=0; i<a.size(); i++)
     {
-        for(i=0; i<n; i++)
-        {
-          if(s[i]=='A')
-            a++;
-          else if(s[i]=='G')
-            g++;
-          else if(s[i]=='C')
-            c++;
-          else if(s[i]=='T')
-            t++;
+        if(a[i]==b[i])
+            s.pb('z');
+        else if(a[i]>b[i])
+            s.pb(b[i]);
+        else{
+            y=1;
+            break;
         }
-        b=n/4;
-        for(i=0; i<n; i++)
-        {
-            if(s[i]=='?')
-            {
-                if(b>a)
-                {
-                    a++;
-                    s[i]='A';
-                }
-                else if(b>c)
-                {
-                    c++;
-                    s[i]='C';
-                }
-                else if(b>t)
-                {
-                    s[i]='T';
-                    t++;
-                }
-                else {
-                    s[i]='G';
-                    g++;
-                }
-            }
-        }
-
-        if((a==b && b==c)&&(g==b && t==b))
-            cout<<s;
-        else
-            cout<<"===";
-
+    }
+    if(y==0)
+    {
+        cout<<s;
     }
     else
-        cout<<"===";
+        cout<<-1;
 
 
 
