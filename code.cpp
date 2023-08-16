@@ -39,27 +39,32 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i;
-    string a,b,s;
-    ll y;
-    cin>>a>>b;
-    y=0;
-    for(i=0; i<a.size(); i++)
-    {
-        if(a[i]==b[i])
-            s.pb('z');
-        else if(a[i]>b[i])
-            s.pb(b[i]);
-        else{
-            y=1;
-            break;
+    ll a,b,c,ans,n;
+    cin>>n>>a>>b>>c;
+    if(n==1)
+        cout<<0;
+    else{
+        ans=0;
+        if(a<=b && a<=c)
+        {
+            ans+=a*(n-1);
+            cout<<ans;
         }
+        else if(b<=a && b<=c)
+        {
+            ans+=b*(n-1);
+            cout<<ans;
+        }
+        else if(c<a&& c<b)
+        {
+            b=min(a,b);
+            n-=2;
+            ans+=b;
+            ans+=c*n;
+            cout<<ans;
+        }
+
     }
-    if(y==0)
-    {
-        cout<<s;
-    }
-    else
-        cout<<-1;
 
 
 
