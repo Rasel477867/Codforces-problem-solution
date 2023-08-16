@@ -39,31 +39,15 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i;
-    ll a,b,c,ans,n;
-    cin>>n>>a>>b>>c;
-    if(n==1)
-        cout<<0;
+    ll n,m,ans;
+    cin>>n>>m;
+    if(m==0)
+        cout<<1;
     else{
-        ans=0;
-        if(a<=b && a<=c)
-        {
-            ans+=a*(n-1);
-            cout<<ans;
-        }
-        else if(b<=a && b<=c)
-        {
-            ans+=b*(n-1);
-            cout<<ans;
-        }
-        else if(c<a&& c<b)
-        {
-            b=min(a,b);
-            n-=2;
-            ans+=b;
-            ans+=c*n;
-            cout<<ans;
-        }
 
+
+    ans=min(m,n-m);
+    cout<<ans;
     }
 
 
