@@ -43,23 +43,17 @@ int main()
     ll j,i;
     ll t,x,y,n,m,ans,a,b,c,d1,d;
     cin>>t;
+    set<char>s;
+    string s1,s2;
     while(t--)
     {
-        cin>>n>>m>>x>>y>>d1;
-        a=x-d1;
-        b=x+d1;
-        c=y-d1;
-        d=y+d1;
-        if((a<=1&& b>=n)||(c<=1 && d>=m))
-            cout<<-1<<endl;
-        else if(a<=1 && c<=1)
-            cout<<-1<<endl;
-        else if(b>=n && d>=m)
-            cout<<-1<<endl;
-        else{
-            ans=n-1+m-1;
-            cout<<ans<<endl;
-        }
+        s.clear();
+        cin>>s1>>s2;
+        s.insert(s1[0]);
+        s.insert(s1[1]);
+        s.insert(s2[0]);
+        s.insert(s2[1]);
+        cout<<s.size()-1<<endl;
     }
 
     return 0;
