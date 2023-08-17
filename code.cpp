@@ -11,7 +11,7 @@
 const ll mod=1e9+7;
 using namespace std;
 
-
+vector<ll>v;
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -39,18 +39,21 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i;
-    ll n,m,ans;
-    cin>>n>>m;
-    if(m==0)
-        cout<<1;
-    else{
-
-
-    ans=min(m,n-m);
-    cout<<ans;
+    ll a,b,c,n;
+    cin>>n;
+    a=0;
+    b=0;
+    for(i=0; i<n; i++)
+    {
+        cin>>c;
+        a=a|c;
     }
-
-
+    for(i=0; i<n; i++)
+    {
+     cin>>c;
+     b=b|c;
+    }
+    cout<<a+b;
 
     return 0;
 }
