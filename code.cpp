@@ -10,8 +10,10 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-
+vector<pair<ll,ll> >v1;
 vector<ll>v;
+ll ar[1000000];
+
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -39,21 +41,26 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i;
-    ll a,b,c,n;
-    cin>>n;
-    a=0;
-    b=0;
-    for(i=0; i<n; i++)
+    ll t,x,y,n,m,ans,a,b,c,d1,d;
+    cin>>t;
+    while(t--)
     {
-        cin>>c;
-        a=a|c;
+        cin>>n>>m>>x>>y>>d1;
+        a=x-d1;
+        b=x+d1;
+        c=y-d1;
+        d=y+d1;
+        if((a<=1&& b>=n)||(c<=1 && d>=m))
+            cout<<-1<<endl;
+        else if(a<=1 && c<=1)
+            cout<<-1<<endl;
+        else if(b>=n && d>=m)
+            cout<<-1<<endl;
+        else{
+            ans=n-1+m-1;
+            cout<<ans<<endl;
+        }
     }
-    for(i=0; i<n; i++)
-    {
-     cin>>c;
-     b=b|c;
-    }
-    cout<<a+b;
 
     return 0;
 }
