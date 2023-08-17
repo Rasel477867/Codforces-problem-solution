@@ -10,9 +10,7 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-vector<pair<ll,ll> >v1;
-vector<ll>v;
-ll ar[1000000];
+
 
 //ll ex(ll a,ll b,ll mod)
 //{
@@ -40,20 +38,31 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll j,i;
-    ll t,x,y,n,m,ans,a,b,c,d1,d;
+    ll j,i,t;
+    ll n,a,b,num,y,m;
     cin>>t;
-    set<char>s;
-    string s1,s2;
     while(t--)
     {
-        s.clear();
-        cin>>s1>>s2;
-        s.insert(s1[0]);
-        s.insert(s1[1]);
-        s.insert(s2[0]);
-        s.insert(s2[1]);
-        cout<<s.size()-1<<endl;
+        cin>>n>>m;
+        num=n+m;
+        a=n-m;
+        if(a!=1)
+            cout<<"NO"<<endl;
+        else{
+        y=0;
+        for(i=2; i*i<=num; i++)
+        {
+            if(num%i==0)
+            {
+                y=1;
+                break;
+            }
+        }
+        if(y==0)
+            cout<<"YES"<<endl;
+        else
+            cout<<"NO"<<endl;
+        }
     }
 
     return 0;
