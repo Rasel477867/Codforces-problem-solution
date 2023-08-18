@@ -11,7 +11,16 @@
 const ll mod=1e9+7;
 using namespace std;
 vector<ll>v;
+ll k,ak,a1,n;
+bool cheak(ll mid)
+{
+    ll p=mid*k+k*ak+a1,num;
+    if(p>=n)
+        return true;
+    else if(p<n)
+        return false;
 
+}
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -39,41 +48,66 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i,t;
-    ll n,m,a,b,p,x,y;
-    cin>>n>>m;
-    for(i=0; i<n; i++)
+    ll a,b,num,ans,l,r,mid;
+    cin>>t;
+    while(t--)
     {
-        cin>>a;
-        v.pb(a);
+        cin>>n>>k>>a1>>ak;
+        num=a1+k*ak;
+
+        if(num==n)
+            cout<<0<<endl;
+        else if(num>n)
+        {
+             a=n/k;
+
+             if(a<=ak)
+                b=a*k;
+             else
+                b=ak*k;
+
+
+                n=n-b-a1;
+                if(n<=0)
+                    cout<<0<<endl;
+                else
+                    cout<<n<<endl;
+
+        }
+        else
+        {
+            l=0;
+            r=1e8;
+            while(r>=l)
+            {
+                mid=(l+r)/2;
+                if(cheak(mid))
+                {
+                    ans=mid;
+                    r=mid-1;
+                }
+                else
+                    l=mid+1;
+            }
+
+            a=ans*k+k*ak+a1;
+            if(a==n)
+                cout<<ans<<endl;
+            else
+            {
+                b=a-n;
+                if(b<=a1)
+                    cout<<ans<<endl;
+                else{
+                   ans--;
+                   a=ans*k+ak*k+a1;
+                   b=n-a;
+                   ans+=b;
+                   cout<<ans<<endl;
+                }
+
+            }
+        }
     }
-    reverse(v.begin(),v.end());
-    b=m;
-    x=v[0];
-    for(i=1; i<n; i++)
-    {
-        x+=v[i]*b;
-        b=b*m;
-    }
-    v.clear();
-    cin>>n>>m;
-    for(i=0; i<n; i++)
-    {
-        cin>>a;
-        v.pb(a);
-    }
-    reverse(v.begin(),v.end());
-    b=m;
-    y=v[0];
-    for(i=1; i<n; i++)
-    {
-        y+=v[i]*b;
-        b=b*m;
-    }
-    if(x>y)
-        cout<<">";
-    else if(x<y)
-        cout<<"<";
-    else
-        cout<<"=";
     return 0;
 }
