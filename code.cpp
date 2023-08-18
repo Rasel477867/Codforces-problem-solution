@@ -11,16 +11,6 @@
 const ll mod=1e9+7;
 using namespace std;
 vector<ll>v;
-ll k,ak,a1,n;
-bool cheak(ll mid)
-{
-    ll p=mid*k+k*ak+a1,num;
-    if(p>=n)
-        return true;
-    else if(p<n)
-        return false;
-
-}
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -48,66 +38,37 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i,t;
-    ll a,b,num,ans,l,r,mid;
+    ll n,a,mn;
     cin>>t;
     while(t--)
     {
-        cin>>n>>k>>a1>>ak;
-        num=a1+k*ak;
+        cin>>n;
+        stack<ll>s;
+        v.clear();
 
-        if(num==n)
-            cout<<0<<endl;
-        else if(num>n)
+        for(i=0; i<n; i++)
         {
-             a=n/k;
-
-             if(a<=ak)
-                b=a*k;
-             else
-                b=ak*k;
-
-
-                n=n-b-a1;
-                if(n<=0)
-                    cout<<0<<endl;
-                else
-                    cout<<n<<endl;
-
+            cin>>a;
+            v.pb(a);
         }
-        else
+        mn=v[0];
+        for(i=1; i<n; i++)
         {
-            l=0;
-            r=1e8;
-            while(r>=l)
+            if(s.empty())
             {
-                mid=(l+r)/2;
-                if(cheak(mid))
-                {
-                    ans=mid;
-                    r=mid-1;
-                }
+                if(mn<v[i])
+                    s.push(v[i]);
                 else
-                    l=mid+1;
+                    mn=min(v[i],mn);
             }
-
-            a=ans*k+k*ak+a1;
-            if(a==n)
-                cout<<ans<<endl;
-            else
-            {
-                b=a-n;
-                if(b<=a1)
-                    cout<<ans<<endl;
-                else{
-                   ans--;
-                   a=ans*k+ak*k+a1;
-                   b=n-a;
-                   ans+=b;
-                   cout<<ans<<endl;
-                }
-
+            else{
+                if(s.top()>v[i] && mn<v[i])
+                    s.push(v[i]);
+                mn=min(mn,v[i]);
             }
         }
+        cout<<s.size()<<endl;
+
     }
     return 0;
 }
