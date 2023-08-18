@@ -38,37 +38,29 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i,t;
-    ll n,a,mn;
-    cin>>t;
-    while(t--)
+    ll n,a,b,num;
+    cin>>n;
+    num=n;
+    ll d=0,rev;
+    while(n!=0)
     {
-        cin>>n;
-        stack<ll>s;
-        v.clear();
-
-        for(i=0; i<n; i++)
-        {
-            cin>>a;
-            v.pb(a);
-        }
-        mn=v[0];
-        for(i=1; i<n; i++)
-        {
-            if(s.empty())
-            {
-                if(mn<v[i])
-                    s.push(v[i]);
-                else
-                    mn=min(v[i],mn);
-            }
-            else{
-                if(s.top()>v[i] && mn<v[i])
-                    s.push(v[i]);
-                mn=min(mn,v[i]);
-            }
-        }
-        cout<<s.size()<<endl;
-
+        rev=n%10;
+        n=n/10;
+        d++;
     }
+    if(rev==9)
+    {
+        a=1;
+    }
+    else{
+        a=rev+1;
+        d--;
+    }
+    n=a;
+    for(i=0; i<d; i++)
+    {
+        n=n*10;
+    }
+    cout<<n-num;
     return 0;
 }
