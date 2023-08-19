@@ -10,7 +10,8 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-
+vector<ll>v;
+map<ll,ll>m;
 //bool cheak(ll n,string s,string s1)
 //{
 //    set<string>s2;
@@ -51,57 +52,67 @@ using namespace std;
 //    else
 //        return (a*ex((a*a)%mod,(b-1)/2,mod))%mod;
 //}
-long long int gcd(long long int a,long long int b)
-{
-    long long int c;
-    while(a%b!=0)
-    {
-        c=b;
-        b=a%b;
-        a=c;
-    }
-    return b;
-}
+//long long int gcd(long long int a,long long int b)
+//{
+//    long long int c;
+//    while(a%b!=0)
+//    {
+//        c=b;
+//        b=a%b;
+//        a=c;
+//    }
+//    return b;
+//}
 
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll j,i,t;
-     ll n,a,b,y,k,num;
-   t=1;
-   deque<char>v;
-   deque<char>v1;
+    ll i,j,t;
+    ll n,a,b,p=-1,sum;
+    cin>>n>>t;
+    sum=0;
+    for(i=0; i<n; i++)
+    {
+        cin>>a;
+        v.pb(a);
+        sum+=a;
+    }
     while(t--)
     {
-        string s;
-        cin>>s;
-        n=s.size();
-        num=n-1;
-        a=num/2;
-        string ans;
-        ans.pb(s[a]);
-        for(i=0; i<a; i++)
+        ll num;
+        cin>>num;
+        if(num==1)
         {
-            v.pb(s[i]);
+            cin>>a>>b;
+            if(p==-1)
+            {
+                sum+=b-v[a-1];
+                v[a-1]=b;
+                cout<<sum<<endl;
+            }
+            else{
+                if(m[a]==0)
+                {
+                    sum+=b-p;
+                    m[a]=b;
+                    cout<<sum<<endl;
+                }
+                else{
+                    sum+=b-m[a];
+                    cout<<sum<<endl;
+                }
+            }
+
         }
-        for(i=a+1; i<n; i++)
-        {
-            v1.pb(s[i]);
+        else{
+            cin>>a;
+            sum=a*n;
+            m.clear();
+            p=a;
+            cout<<sum<<endl;
         }
-        for(i=0; i<n; i++)
-        {
-            if(v.size()==0 && v1.size()==0)
-                break;
-            ans.pb(v1.front());
-            v1.pop_front();
-            if(v.size()==0)
-                continue;
-            ans.pb(v.back());
-            v.pop_back();
-        }
-        cout<<ans;
     }
-    return 0;
+
 }
