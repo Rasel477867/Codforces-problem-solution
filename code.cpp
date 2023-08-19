@@ -10,39 +10,38 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-vector<ll>v;
- string sub;
-bool cheak(ll n,string s,string s1)
-{
-    set<string>s2;
 
-    ll i;
-    if(s.size()%n!=0 || s.size()<n)
-        return false;
-    for(i=0; i<s.size()-n+1; i=i+n)
-    {
-        sub=s.substr(i,n);
-
-       if(s2.size()>1)
-          return false;
-        s2.insert(sub);
-
-    }
-    if(s1.size()%n!=0 || s1.size()<n)
-        return false;
-    for(i=0; i<s1.size()-n+1; i+=n)
-    {
-        sub=s1.substr(i,n);
-
-        if(s2.size()>1)
-            return false;
-        s2.insert(sub);
-    }
-    if(s2.size()==1)
-        return true;
-    else
-        return false;
-}
+//bool cheak(ll n,string s,string s1)
+//{
+//    set<string>s2;
+//
+//    ll i;
+//    if(s.size()%n!=0 || s.size()<n)
+//        return false;
+//    for(i=0; i<s.size()-n+1; i=i+n)
+//    {
+//        sub=s.substr(i,n);
+//
+//       if(s2.size()>1)
+//          return false;
+//        s2.insert(sub);
+//
+//    }
+//    if(s1.size()%n!=0 || s1.size()<n)
+//        return false;
+//    for(i=0; i<s1.size()-n+1; i+=n)
+//    {
+//        sub=s1.substr(i,n);
+//
+//        if(s2.size()>1)
+//            return false;
+//        s2.insert(sub);
+//    }
+//    if(s2.size()==1)
+//        return true;
+//    else
+//        return false;
+//}
 //ll ex(ll a,ll b,ll mod)
 //{
 //    if(b==0)
@@ -70,36 +69,39 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll j,i,t;
-    ll n,a,b,p,y;
-    string s,s1;
-    cin>>t;
+     ll n,a,b,y,k,num;
+   t=1;
+   deque<char>v;
+   deque<char>v1;
     while(t--)
     {
-        cin>>s>>s1;
-        y=0;
-        a=s.size();
-        b=s1.size();
-        n=min(a,b);
+        string s;
+        cin>>s;
+        n=s.size();
+        num=n-1;
+        a=num/2;
+        string ans;
+        ans.pb(s[a]);
+        for(i=0; i<a; i++)
+        {
+            v.pb(s[i]);
+        }
+        for(i=a+1; i<n; i++)
+        {
+            v1.pb(s[i]);
+        }
         for(i=0; i<n; i++)
         {
-            if(cheak(i+1,s,s1))
-            {
-                p=i+1;
-                y=1;
+            if(v.size()==0 && v1.size()==0)
                 break;
-            }
+            ans.pb(v1.front());
+            v1.pop_front();
+            if(v.size()==0)
+                continue;
+            ans.pb(v.back());
+            v.pop_back();
         }
-        if(y==0)
-            cout<<-1<<endl;
-        else
-            {
-              a=gcd(s.size(),s1.size());
-              b=(s.size()*s1.size())/a;
-              n=sub.size();
-              for(i=1; i<=b;i+=n)
-                cout<<sub;
-              cout<<endl;
-            }
+        cout<<ans;
     }
     return 0;
 }
