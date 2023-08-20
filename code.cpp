@@ -70,49 +70,33 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,a,b,p=-1,sum;
-    cin>>n>>t;
-    sum=0;
-    for(i=0; i<n; i++)
+    ll n,sum,pre=-1,z,ans;
+    cin>>n;
+    ll a;
+    for(i=0; i<n;i++)
     {
         cin>>a;
         v.pb(a);
-        sum+=a;
     }
-    while(t--)
+    ans=0;
+    z=0;
+    for(i=0; i<n; i++)
     {
-        ll num;
-        cin>>num;
-        if(num==1)
+        if(v[i]==0)
         {
-            cin>>a>>b;
-            if(p==-1)
-            {
-                sum+=b-v[a-1];
-                v[a-1]=b;
-                cout<<sum<<endl;
-            }
-            else{
-                if(m[a]==0)
-                {
-                    sum+=b-p;
-                    m[a]=b;
-                    cout<<sum<<endl;
-                }
-                else{
-                    sum+=b-m[a];
-                    cout<<sum<<endl;
-                }
-            }
-
+            if(pre==-1)
+                continue;
+            else
+                z++;
         }
         else{
-            cin>>a;
-            sum=a*n;
-            m.clear();
-            p=a;
-            cout<<sum<<endl;
+            pre=1;
+            ans+=1;
+            if(z==1)
+                ans++;
+            z=0;
         }
     }
+    cout<<ans;
 
 }
