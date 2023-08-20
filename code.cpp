@@ -70,33 +70,37 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll i,j,t;
-    ll n,sum,pre=-1,z,ans;
-    cin>>n;
-    ll a;
-    for(i=0; i<n;i++)
+    ll n,m,a,sum,mn,mi;
+    cin>>t;
+    while(t--)
     {
-        cin>>a;
-        v.pb(a);
-    }
-    ans=0;
-    z=0;
-    for(i=0; i<n; i++)
-    {
-        if(v[i]==0)
+        cin>>n>>m;
+        sum=0;
+        mn=200;
+        mi=0;
+        for(i=0; i<n; i++)
         {
-            if(pre==-1)
-                continue;
-            else
-                z++;
+            for(j=0; j<m; j++)
+            {
+                cin>>a;
+                if(a<0)
+                    mi++;
+                a=abs(a);
+                mn=min(mn,a);
+                sum+=a;
+            }
         }
-        else{
-            pre=1;
-            ans+=1;
-            if(z==1)
-                ans++;
-            z=0;
+        if(mn==0)
+            cout<<sum<<endl;
+        else
+        {
+            if(mi%2==0)
+                cout<<sum<<endl;
+            else
+            {
+                cout<<sum-(mn*2)<<endl;
+            }
         }
     }
-    cout<<ans;
 
 }
