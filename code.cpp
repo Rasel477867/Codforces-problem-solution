@@ -10,7 +10,7 @@
 #define pf push_front
 const ll mod=1e9+7;
 using namespace std;
-vector<ll>v;
+vector<string>v;
 map<ll,ll>m;
 //bool cheak(ll n,string s,string s1)
 //{
@@ -69,38 +69,32 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll i,j,t;
-    ll n,m,a,sum,mn,mi;
-    cin>>t;
-    while(t--)
+     ll i,j,t;
+    ll n,a,b,c,ans,d,f,k;
+    cin>>n>>k;
+    b=k*2;
+    ans=0;
+    f=0;
+    for(i=0; i<n; i++)
     {
-        cin>>n>>m;
-        sum=0;
-        mn=200;
-        mi=0;
-        for(i=0; i<n; i++)
-        {
-            for(j=0; j<m; j++)
-            {
-                cin>>a;
-                if(a<0)
-                    mi++;
-                a=abs(a);
-                mn=min(mn,a);
-                sum+=a;
-            }
-        }
-        if(mn==0)
-            cout<<sum<<endl;
+        cin>>a;
+        c=a/b;
+        ans+=c;
+        if(c*b==a)
+            continue;
+        d=a-b*c;
+        if(d>k)
+            f+=2;
         else
-        {
-            if(mi%2==0)
-                cout<<sum<<endl;
-            else
-            {
-                cout<<sum-(mn*2)<<endl;
-            }
-        }
+            f++;
     }
+    ans+=f/2;
+    if(f%2==1)
+        ans++;
+    cout<<ans<<endl;
+
+    return 0;
+
+
 
 }
