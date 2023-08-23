@@ -12,59 +12,53 @@ const ll mod=1e9+7;
 using namespace std;
 
 deque<ll>v;
+deque<ll>v1;
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
     ll t,i,j;
-    ll ans,a,b,n,m,d,c,y;
-    cin>>t;
-    while(t--)
+    string s;
+    ll n,a;
+    cin>>s;
+    for(i=0; i<s.size(); i++)
     {
-        v.clear();
-        cin>>m>>n;
-        y=0;
-        while(n!=0 || m!=0)
+        a=s[i]-48;
+        v.pb(a);
+        v1.pb(a);
+    }
+    for(i=0; i<v.size(); i++)
+    {
+        if(v1.back()==0)
         {
-            a=n%10;
-            b=m%10;
-            n=n/10;
-            m=m/10;
-
-            if(b>a)
-            {
-                d=n%10;
-                a=d*10+a;
-                n/=10;
-            }
-            c=a-b;
-
-            if(c<=9 && c>=0)
-                v.pb(c);
-            else
-            {
-                y=1;
-                break;
-            }
-        }
-
-        if(y==0 && m==0 && n==0)
-        {
-            for(i=v.size()-1; i>=0; i--)
-            {
-                if(v.back()==0)
-                    v.pop_back();
-                else
-                    break;
-            }
-            for(i=v.size()-1;i>=0; i--)
-                cout<<v[i];
-            cout<<endl;
+            v.push_front(0);
+            v1.pop_back();
         }
         else
-            cout<<-1<<endl;
+            break;
     }
+
+
+    for(i=0; i<20; i++)
+    {
+        if(v.size()==0|| v.size()==1)
+                 break;
+        if(v.back()==v.front())
+        {
+
+            v.pop_back();
+            v.pop_front();
+        }
+        else
+            break;
+
+    }
+
+    if(v.size()<2)
+        cout<<"YES";
+    else
+        cout<<"NO";
 
 
 return 0;
